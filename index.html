@@ -3,167 +3,285 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Привилегии сервера</title>
+  <title>Зомби Сервер — MOTD</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #121212;
-      color: #f0f0f0;
+      background: #051005; /* Тёмно-зелёный, как туман в лесу */
+      color: #e0e0e0;
+      padding: 0;
       margin: 0;
-      padding: 20px;
+    }
+
+    .header {
+      background: #0a250a; /* Тёмнее зелень */
+      padding: 15px 0;
+      text-align: center;
+      border-bottom: 3px solid #8B0000; /* Тёмно-красная кровь */
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      color: #FF6666; /* Кроваво-красный */
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: all 0.3s;
+      background: rgba(0,0,0,0.2);
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      background: #8B0000; /* Тёмно-красный */
+      color: #FFF0F5; /* Почти белый */
     }
 
     .container {
-      max-width: 600px;
-      margin: 0 auto;
-      background: #1e1e1e;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
-    }
-
-    h1 {
-      color: #FFD700;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .menu a {
-      display: block;
-      padding: 14px;
-      margin: 10px 0;
-      background: #007BFF;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      text-align: center;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-
-    .menu a:hover {
-      background: #0056b3;
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
     }
 
     .section {
       display: none;
-      padding: 20px;
-      background: #2d2d2d;
-      border-radius: 8px;
-      margin-top: 20px;
+      animation: fadeIn 0.6s ease-in-out;
+      padding: 30px;
+      background: #0f250f; /* Тёмная гниль */
+      border-radius: 12px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 20px rgba(139, 0, 0, 0.4); /* Кровавая тень */
+      border: 1px solid #440000;
     }
 
-    .section:target {
+    .section.active {
       display: block;
+    }
+
+    h1, h2 {
+      color: #FF4500; /* Оранжево-красный — как заражённая плоть */
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #FF4500;
+    }
+
+    h3 {
+      color: #DC143C; /* Красный крик */
+      margin: 25px 0 12px;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    p, li {
+      margin: 10px 0;
+      line-height: 1.7;
+    }
+
+    strong {
+      color: #FFD700; /* Золото — для акцентов */
+    }
+
+    ul {
+      margin: 20px 0;
+      padding-left: 25px;
     }
 
     .back-btn {
       display: inline-block;
-      margin-top: 20px;
+      margin-top: 25px;
       padding: 12px 24px;
-      background: #6c757d;
+      background: #550000;
       color: white;
       text-decoration: none;
       border-radius: 6px;
       font-weight: bold;
+      transition: background 0.3s;
+      border: 1px solid #8B0000;
     }
 
     .back-btn:hover {
-      background: #5a6268;
+      background: #8B0000;
     }
 
-    @media (max-width: 650px) {
-      .container {
-        margin: 5px;
-        padding: 15px;
-      }
+    .center {
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .nav a { font-size: 16px; padding: 6px 12px; }
+      .container { margin: 10px; padding: 15px; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Шапка навигации -->
+  <div class="header">
+    <div class="nav">
+      <a href="#home" class="nav-link">🏚 Главная</a>
+      <a href="#privileges" class="nav-link">🧟‍♂️ Привилегии</a>
+      <a href="#rules" class="nav-link">📜 Правила</a>
+      <a href="#luck" class="nav-link">🎲 Испытать удачу</a>
+    </div>
+  </div>
+
   <div class="container">
 
-    <!-- Главное меню -->
-    <div id="main" class="menu">
-      <h1>Добро пожаловать на сервер!</h1>
-      <a href="#privileges">📜 Лист привилегий</a>
+    <!-- Раздел: Главная -->
+    <div id="home" class="section">
+      <h1>☠️ ДОБРО ПОЖАЛОВАТЬ НА СЕРВЕР [Zona51] Зона Выживания! ☠️</h1>
+      <p>123</p>
+      <p>123</p>
+      <p>123</p>
+      <div class="center" style="margin-top: 30px;">
+        <a href="#privileges" class="back-btn">➡️ Узнать о привилегиях</a>
+        <a href="#rules" class="back-btn">📖 Правила выживания</a>
+      </div>
     </div>
 
-    <!-- Меню привилегий -->
-    <div id="privileges" class="menu" style="display:none;">
-      <h2>Выберите привилегию</h2>
-      <a href="#vip">🔹 VIP</a>
-      <a href="#boss">🔸 BOSS</a>
-      <a href="#king">🔶 KING</a>
-      <a href="#elita">🔷 ELITA</a>
-      <a href="#arcana">💠 ARCANA</a>
-      <a href="#creator">🔶 CREATOR</a>
-      <a href="#main" class="back-btn">⬅️ Назад</a>
-    </div>
+    <!-- Раздел: Привилегии -->
+    <div id="privileges" class="section">
+      <h2>🧟‍♂️ Привилегии выживших</h2>
 
-    <!-- Описания -->
-    <div id="vip" class="section">
-      <h2>🔹 VIP</h2>
-      <p><strong>Код:</strong> 123123</p>
-      <p><strong>Кнопка:</strong> t</p>
-      <p><strong>Флаг:</strong> a</p>
+      <h3>VIP</h3>
       <p><strong>Описание:</strong> VIP-меню, Меню оружия, 5 паутинок</p>
-      <a href="#privileges" class="back-btn">⬅️ Назад к списку</a>
-    </div>
 
-    <div id="boss" class="section">
-      <h2>🔸 BOSS</h2>
-      <p><strong>Код:</strong> 123123</p>
-      <p><strong>Кнопка:</strong> s</p>
-      <p><strong>Флаг:</strong> a</p>
+      <h3>BOSS</h3>
       <p><strong>Описание:</strong> BOSS-меню, Меню оружия, 10 паутинок</p>
-      <a href="#privileges" class="back-btn">⬅️ Назад к списку</a>
-    </div>
 
-    <div id="king" class="section">
-      <h2>🔶 KING</h2>
-      <p><strong>Код:</strong> 123123</p>
-      <p><strong>Кнопка:</strong> p</p>
-      <p><strong>Флаг:</strong> a</p>
+      <h3>KING</h3>
       <p><strong>Описание:</strong> KING-меню, Меню оружия, 15 паутинок</p>
-      <a href="#privileges" class="back-btn">⬅️ Назад к списку</a>
-    </div>
 
-    <div id="elita" class="section">
-      <h2>🔷 ELITA</h2>
-      <p><strong>Код:</strong> 123123</p>
-      <p><strong>Кнопка:</strong> n</p>
-      <p><strong>Флаг:</strong> a</p>
+      <h3>ELITA</h3>
       <p><strong>Описание:</strong> ELITA-меню, Меню оружия, 20 паутинок</p>
-      <a href="#privileges" class="back-btn">⬅️ Назад к списку</a>
-    </div>
 
-    <div id="arcana" class="section">
-      <h2>💠 ARCANA</h2>
-      <p><strong>Код:</strong> 123123</p>
-      <p><strong>Кнопка:</strong> m</p>
-      <p><strong>Флаг:</strong> a</p>
+      <h3>ARCANA</h3>
       <p><strong>Описание:</strong> ARCANA-меню, Меню оружия, 25 паутинок</p>
-      <a href="#privileges" class="back-btn">⬅️ Назад к списку</a>
+
+      <h3>CREATOR</h3>
+      <p><strong>Описание:</strong> CREATOR-меню, Меню оружия, 25 паутинок</p>
+
+      <div class="center">
+        <a href="#home" class="back-btn">🔼 Наверх</a>
+      </div>
     </div>
 
-    <div id="creator" class="section">
-      <h2>🔶 CREATOR</h2>
-      <p><strong>Код:</strong> 123123</p>
-      <p><strong>Кнопка:</strong> o</p>
-      <p><strong>Флаг:</strong> a</p>
-      <p><strong>Описание:</strong> CREATOR-меню, Меню оружия, 25 паутинок</p>
-      <a href="#privileges" class="back-btn">⬅️ Назад к списку</a>
+    <!-- Раздел: Правила -->
+    <div id="rules" class="section">
+      <h2>📜 Правила выживания</h2>
+      <ul>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+      </ul>
+      <div class="center">
+        <a href="#home" class="back-btn">🔼 Наверх</a>
+      </div>
+    </div>
+
+    <!-- Раздел: Испытать удачу -->
+    <div id="luck" class="section">
+      <h2>123</h2>
+      <p>123</p>
+      <p><strong style="font-size: 24px; color: #FF4500;">123</strong></p>
+      <p>1223</p>
+      <ul>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+      </ul>
+      <p style="color: #FF1493; font-weight: bold; font-size: 18px;">123</p>
+      <div class="center">
+        <a href="#home" class="back-btn">🔼 Наверх</a>
+      </div>
     </div>
 
   </div>
 
-  <!-- Автофокус на главное меню -->
   <script>
-    if (!location.hash) {
-      location.hash = 'main';
-    }
+    document.addEventListener('DOMContentLoaded', function() {
+
+      const sections = document.querySelectorAll('.section');
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      // Показать нужный раздел
+      function showSection(id) {
+        sections.forEach(section => section.classList.remove('active'));
+        navLinks.forEach(link => link.classList.remove('active'));
+
+        const targetSection = document.getElementById(id);
+        if (targetSection) {
+          targetSection.classList.add('active');
+        }
+
+        const activeLink = document.querySelector(`.nav-link[href="#${id}"]`);
+        if (activeLink) {
+          activeLink.classList.add('active');
+        }
+
+        // Плавная прокрутка к шапке
+        document.querySelector('.header').scrollIntoView({ behavior: 'smooth' });
+      }
+
+      // Обработчики навигации
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const id = this.getAttribute('href').substring(1);
+          showSection(id);
+          history.pushState(null, null, `#${id}`);
+        });
+      });
+
+      // Обработчики кнопок "Наверх"
+      document.querySelectorAll('.back-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = this.getAttribute('href') || '#home';
+          const id = target.substring(1);
+          showSection(id);
+        });
+      });
+
+      // При загрузке — показать раздел из хэша или "home"
+      function init() {
+        const hash = location.hash.substring(1) || 'home';
+        showSection(hash);
+      }
+
+      // Поддержка кнопок "Назад/Вперёд" в браузере
+      window.addEventListener('popstate', function() {
+        const hash = location.hash.substring(1) || 'home';
+        showSection(hash);
+      });
+
+      init();
+    });
   </script>
 
 </body>
