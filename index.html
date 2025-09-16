@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Привилегии сервера</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #121212;
+      color: #f0f0f0;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #1e1e1e;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    }
+
+    h1 {
+      color: #FFD700;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .menu a {
+      display: block;
+      padding: 14px;
+      margin: 10px 0;
+      background: #007BFF;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      text-align: center;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .menu a:hover {
+      background: #0056b3;
+    }
+
+    .section {
+      display: none;
+      padding: 20px;
+      background: #2d2d2d;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    .section:target {
+      display: block;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 24px;
+      background: #6c757d;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+
+    .back-btn:hover {
+      background: #5a6268;
+    }
+
+    @media (max-width: 650px) {
+      .container {
+        margin: 5px;
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Главное меню -->
+    <div id="main" class="menu">
+      <h1>Добро пожаловать на сервер!</h1>
+      <a href="#privileges">📜 Лист привилегий</a>
+    </div>
+
+    <!-- Меню привилегий -->
+    <div id="privileges" class="menu" style="display:none;">
+      <h2>Выберите привилегию</h2>
+      <a href="#vip">🔹 VIP</a>
+      <a href="#boss">🔸 BOSS</a>
+      <a href="#king">🔶 KING</a>
+      <a href="#elita">🔷 ELITA</a>
+      <a href="#arcana">💠 ARCANA</a>
+      <a href="#creator">🔶 CREATOR</a>
+      <a href="#main" class="back-btn">⬅️ Назад</a>
+    </div>
+
+    <!-- Описания -->
+    <div id="vip" class="section">
+      <h2>🔹 VIP</h2>
+      <p><strong>Код:</strong> 123123</p>
+      <p><strong>Кнопка:</strong> t</p>
+      <p><strong>Флаг:</strong> a</p>
+      <p><strong>Описание:</strong> VIP-меню, Меню оружия, 5 паутинок</p>
+      <a href="#privileges" class="back-btn">⬅️ Назад к списку</a>
+    </div>
+
+    <div id="boss" class="section">
+      <h2>🔸 BOSS</h2>
+      <p><strong>Код:</strong> 123123</p>
+      <p><strong>Кнопка:</strong> s</p>
+      <p><strong>Флаг:</strong> a</p>
+      <p><strong>Описание:</strong> BOSS-меню, Меню оружия, 10 паутинок</p>
+      <a href="#privileges" class="back-btn">⬅️ Назад к списку</a>
+    </div>
+
+    <div id="king" class="section">
+      <h2>🔶 KING</h2>
+      <p><strong>Код:</strong> 123123</p>
+      <p><strong>Кнопка:</strong> p</p>
+      <p><strong>Флаг:</strong> a</p>
+      <p><strong>Описание:</strong> KING-меню, Меню оружия, 15 паутинок</p>
+      <a href="#privileges" class="back-btn">⬅️ Назад к списку</a>
+    </div>
+
+    <div id="elita" class="section">
+      <h2>🔷 ELITA</h2>
+      <p><strong>Код:</strong> 123123</p>
+      <p><strong>Кнопка:</strong> n</p>
+      <p><strong>Флаг:</strong> a</p>
+      <p><strong>Описание:</strong> ELITA-меню, Меню оружия, 20 паутинок</p>
+      <a href="#privileges" class="back-btn">⬅️ Назад к списку</a>
+    </div>
+
+    <div id="arcana" class="section">
+      <h2>💠 ARCANA</h2>
+      <p><strong>Код:</strong> 123123</p>
+      <p><strong>Кнопка:</strong> m</p>
+      <p><strong>Флаг:</strong> a</p>
+      <p><strong>Описание:</strong> ARCANA-меню, Меню оружия, 25 паутинок</p>
+      <a href="#privileges" class="back-btn">⬅️ Назад к списку</a>
+    </div>
+
+    <div id="creator" class="section">
+      <h2>🔶 CREATOR</h2>
+      <p><strong>Код:</strong> 123123</p>
+      <p><strong>Кнопка:</strong> o</p>
+      <p><strong>Флаг:</strong> a</p>
+      <p><strong>Описание:</strong> CREATOR-меню, Меню оружия, 25 паутинок</p>
+      <a href="#privileges" class="back-btn">⬅️ Назад к списку</a>
+    </div>
+
+  </div>
+
+  <!-- Автофокус на главное меню -->
+  <script>
+    if (!location.hash) {
+      location.hash = 'main';
+    }
+  </script>
+
+</body>
+</html>
