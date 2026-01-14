@@ -1,288 +1,174 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Зомби Сервер — MOTD</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Получи награду!</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #1a1a2e;
+            color: #e0e0ff;
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden; /* Предотвращаем появление скролла */
+        }
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #051005; /* Тёмно-зелёный, как туман в лесу */
-      color: #e0e0e0;
-      padding: 0;
-      margin: 0;
-    }
+        .ad-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh; /* Занимает всю высоту экрана */
+            padding: 20px; /* Отступы от краёв */
+            box-sizing: border-box; /* Учитываем padding в расчёте высоты */
+        }
 
-    .header {
-      background: #0a250a; /* Тёмнее зелень */
-      padding: 15px 0;
-      text-align: center;
-      border-bottom: 3px solid #8B0000; /* Тёмно-красная кровь */
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+        .rewarded-ad {
+            width: 100%;
+            max-width: 600px; /* Ограничиваем ширину на больших экранах */
+            height: 400px; /* Высота контейнера под рекламу */
+            background-color: #2c3e50; /* Фон на случай, если реклама не загрузится */
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px; /* Отступ снизу */
+            overflow: hidden; /* Обрезаем, если реклама выходит за рамки */
+        }
 
-    .nav {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
+        .rewarded-ad iframe,
+        .rewarded-ad img,
+        .rewarded-ad div { /* На случай, если реклама вставляется как div */
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+        }
 
-    .nav a {
-      color: #FF6666; /* Кроваво-красный */
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 18px;
-      padding: 8px 16px;
-      border-radius: 6px;
-      transition: all 0.3s;
-      background: rgba(0,0,0,0.2);
-    }
+        .nav-button {
+            background-color: #2b59d7;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: auto; /* Автоматическая ширина */
+            max-width: 200px; /* Максимальная ширина кнопки */
+        }
 
-    .nav a:hover,
-    .nav a.active {
-      background: #8B0000; /* Тёмно-красный */
-      color: #FFF0F5; /* Почти белый */
-    }
+        .nav-button:hover {
+            background-color: #1e41a8;
+        }
 
-    .container {
-      max-width: 800px;
-      margin: 30px auto;
-      padding: 20px;
-    }
+        .hidden {
+            display: none;
+        }
 
-    .section {
-      display: none;
-      animation: fadeIn 0.6s ease-in-out;
-      padding: 30px;
-      background: #0f250f; /* Тёмная гниль */
-      border-radius: 12px;
-      margin-bottom: 30px;
-      box-shadow: 0 4px 20px rgba(139, 0, 0, 0.4); /* Кровавая тень */
-      border: 1px solid #440000;
-    }
-
-    .section.active {
-      display: block;
-    }
-
-    h1, h2 {
-      color: #FF4500; /* Оранжево-красный — как заражённая плоть */
-      margin-bottom: 20px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid #FF4500;
-    }
-
-    h3 {
-      color: #DC143C; /* Красный крик */
-      margin: 25px 0 12px;
-      text-shadow: 1px 1px 2px #000;
-    }
-
-    p, li {
-      margin: 10px 0;
-      line-height: 1.7;
-    }
-
-    strong {
-      color: #FFD700; /* Золото — для акцентов */
-    }
-
-    ul {
-      margin: 20px 0;
-      padding-left: 25px;
-    }
-
-    .back-btn {
-      display: inline-block;
-      margin-top: 25px;
-      padding: 12px 24px;
-      background: #550000;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
-      transition: background 0.3s;
-      border: 1px solid #8B0000;
-    }
-
-    .back-btn:hover {
-      background: #8B0000;
-    }
-
-    .center {
-      text-align: center;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(15px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 600px) {
-      .nav a { font-size: 16px; padding: 6px 12px; }
-      .container { margin: 10px; padding: 15px; }
-    }
-  </style>
+        .status-text {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #a0a0d0;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Шапка навигации -->
-  <div class="header">
-    <div class="nav">
-      <a href="#home" class="nav-link">🏚 Главная</a>
-      <a href="#privileges" class="nav-link">🧟‍♂️ Привилегии</a>
-      <a href="#rules" class="nav-link">📜 Правила</a>
-      <a href="#luck" class="nav-link">🎲 Испытать удачу</a>
-    </div>
-  </div>
-
-  <div class="container">
-
-    <!-- Раздел: Главная -->
-    <div id="home" class="section">
-      <h1>☠️ ДОБРО ПОЖАЛОВАТЬ НА СЕРВЕР [Zona51] Зона Выживания! ☠️</h1>
-      <p>123</p>
-      <p>123</p>
-      <p>123</p>
-      <div class="center" style="margin-top: 30px;">
-        <a href="#privileges" class="back-btn">➡️ Узнать о привилегиях</a>
-        <a href="#rules" class="back-btn">📖 Правила выживания</a>
-      </div>
+    <!-- Блок с первой рекламой -->
+    <div id="adBlock1" class="ad-container">
+        <h1 class="text-2xl font-bold mb-6 text-center">Посмотри рекламу !</h1>
+        <div class="rewarded-ad">
+            <!-- Примерный placeholder для рекламы от Яндекса. В реальности сюда будет вставлен код от Яндекс.Рекламы -->
+            <div class="text-center text-gray-400">
+                <!-- Замените этот div на фактический код баннера или вызова SDK -->
+                <!-- Пример: <ins data-revive-zoneid="YOUR_ZONE_ID" data-revive-id="..."></ins> -->
+                <!-- Пример для тестирования: -->
+                <p>Блок рекламы 1 (Здесь будет реклама от Яндекс.Рекламной сети)</p>
+                <p class="text-xs mt-2">[Код рекламы вставляется сюда]</p>
+            </div>
+        </div>
+        <button id="nextButton" class="nav-button" disabled>Далее</button>
+        <p id="status1" class="status-text">Просмотрите рекламу до конца, чтобы разблокировать кнопку.</p>
     </div>
 
-    <!-- Раздел: Привилегии -->
-    <div id="privileges" class="section">
-      <h2>🧟‍♂️ Привилегии выживших</h2>
-
-      <h3>VIP</h3>
-      <p><strong>Описание:</strong> VIP-меню, Меню оружия, 5 паутинок</p>
-
-      <h3>BOSS</h3>
-      <p><strong>Описание:</strong> BOSS-меню, Меню оружия, 10 паутинок</p>
-
-      <h3>KING</h3>
-      <p><strong>Описание:</strong> KING-меню, Меню оружия, 15 паутинок</p>
-
-      <h3>ELITA</h3>
-      <p><strong>Описание:</strong> ELITA-меню, Меню оружия, 20 паутинок</p>
-
-      <h3>ARCANA</h3>
-      <p><strong>Описание:</strong> ARCANA-меню, Меню оружия, 25 паутинок</p>
-
-      <h3>CREATOR</h3>
-      <p><strong>Описание:</strong> CREATOR-меню, Меню оружия, 25 паутинок</p>
-
-      <div class="center">
-        <a href="#home" class="back-btn">🔼 Наверх</a>
-      </div>
+    <!-- Блок со второй рекламой (скрыт по умолчанию) -->
+    <div id="adBlock2" class="ad-container hidden">
+        <h1 class="text-2xl font-bold mb-6 text-center">Ещё одна награда за просмотр!</h1>
+        <div class="rewarded-ad">
+            <!-- Примерный placeholder для второй рекламы -->
+            <div class="text-center text-gray-400">
+                 <!-- Замените этот div на фактический код второй рекламы -->
+                 <p>Блок рекламы 2 (Вторая реклама от Яндекс.Рекламной сети)</p>
+                 <p class="text-xs mt-2">[Код второй рекламы вставляется сюда]</p>
+            </div>
+        </div>
+        <button id="continueButton" class="nav-button" disabled>Продолжить</button>
+        <p id="status2" class="status-text">Просмотрите рекламу до конца, чтобы разблокировать кнопку.</p>
     </div>
 
-    <!-- Раздел: Правила -->
-    <div id="rules" class="section">
-      <h2>📜 Правила выживания</h2>
-      <ul>
-        <li>123</li>
-        <li>123</li>
-        <li>123</li>
-        <li>123</li>
-        <li>123</li>
-        <li>123</li>
-      </ul>
-      <div class="center">
-        <a href="#home" class="back-btn">🔼 Наверх</a>
-      </div>
+    <!-- Блок с результатом (скрыт по умолчанию) -->
+    <div id="resultBlock" class="ad-container hidden">
+        <h1 class="text-2xl font-bold mb-6 text-center">Поздравляем!</h1>
+        <p class="text-lg mb-6 text-center">Вы успешно просмотрели все рекламы и получили свою награду!</p>
+        <!-- Здесь можно разместить информацию о награде или кнопку для её получения -->
+        <button id="claimRewardButton" class="nav-button">Забрать награду</button>
+        <p class="status-text mt-4">Спасибо за участие!</p>
     </div>
 
-    <!-- Раздел: Испытать удачу -->
-    <div id="luck" class="section">
-      <h2>123</h2>
-      <p>123</p>
-      <p><strong style="font-size: 24px; color: #FF4500;">123</strong></p>
-      <p>1223</p>
-      <ul>
-        <li>123</li>
-        <li>123</li>
-        <li>123</li>
-        <li>123</li>
-        <li>123</li>
-      </ul>
-      <p style="color: #FF1493; font-weight: bold; font-size: 18px;">123</p>
-      <div class="center">
-        <a href="#home" class="back-btn">🔼 Наверх</a>
-      </div>
-    </div>
+    <script>
+        // Состояния просмотра реклам
+        let ad1Watched = false;
+        let ad2Watched = false;
 
-  </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-
-      const sections = document.querySelectorAll('.section');
-      const navLinks = document.querySelectorAll('.nav-link');
-
-      // Показать нужный раздел
-      function showSection(id) {
-        sections.forEach(section => section.classList.remove('active'));
-        navLinks.forEach(link => link.classList.remove('active'));
-
-        const targetSection = document.getElementById(id);
-        if (targetSection) {
-          targetSection.classList.add('active');
+        // Функция для симуляции завершения просмотра рекламы
+        // В реальной интеграции с SDK рекламы, вы будете вызывать эту функцию по событию onComplete
+        function simulateAdCompletion(adNumber) {
+            if (adNumber === 1) {
+                ad1Watched = true;
+                document.getElementById('nextButton').disabled = false;
+                document.getElementById('status1').textContent = "Реклама 1 просмотрена! Нажмите 'Далее'.";
+            } else if (adNumber === 2) {
+                ad2Watched = true;
+                document.getElementById('continueButton').disabled = false;
+                document.getElementById('status2').textContent = "Реклама 2 просмотрена! Нажмите 'Продолжить'.";
+            }
         }
 
-        const activeLink = document.querySelector(`.nav-link[href="#${id}"]`);
-        if (activeLink) {
-          activeLink.classList.add('active');
-        }
-
-        // Плавная прокрутка к шапке
-        document.querySelector('.header').scrollIntoView({ behavior: 'smooth' });
-      }
-
-      // Обработчики навигации
-      navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-          const id = this.getAttribute('href').substring(1);
-          showSection(id);
-          history.pushState(null, null, `#${id}`);
+        // Обработчики нажатий на кнопки
+        document.getElementById('nextButton').addEventListener('click', function() {
+            if (ad1Watched) {
+                document.getElementById('adBlock1').classList.add('hidden');
+                document.getElementById('adBlock2').classList.remove('hidden');
+            }
         });
-      });
 
-      // Обработчики кнопок "Наверх"
-      document.querySelectorAll('.back-btn').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-          e.preventDefault();
-          const target = this.getAttribute('href') || '#home';
-          const id = target.substring(1);
-          showSection(id);
+        document.getElementById('continueButton').addEventListener('click', function() {
+            if (ad2Watched) {
+                document.getElementById('adBlock2').classList.add('hidden');
+                document.getElementById('resultBlock').classList.remove('hidden');
+            }
         });
-      });
 
-      // При загрузке — показать раздел из хэша или "home"
-      function init() {
-        const hash = location.hash.substring(1) || 'home';
-        showSection(hash);
-      }
+        // Пример: автоматически "просматриваем" рекламу через 5 секунд для демонстрации
+        // УДАЛИТЕ ЭТО в продакшене!
+        setTimeout(() => {
+            console.log("Симуляция завершения рекламы 1");
+            simulateAdCompletion(1);
+        }, 5000);
 
-      // Поддержка кнопок "Назад/Вперёд" в браузере
-      window.addEventListener('popstate', function() {
-        const hash = location.hash.substring(1) || 'home';
-        showSection(hash);
-      });
+        setTimeout(() => {
+            console.log("Симуляция завершения рекламы 2");
+            simulateAdCompletion(2);
+        }, 10000);
 
-      init();
-    });
-  </script>
+        // Обработчик для кнопки "Забрать награду" (пример)
+        document.getElementById('claimRewardButton').addEventListener('click', function() {
+            alert("Поздравляем! Ваша награда начислена!");
+             // Здесь можно добавить логику начисления награды
+        });
 
+    </script>
 </body>
 </html>
