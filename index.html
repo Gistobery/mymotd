@@ -73,6 +73,9 @@
             text-align: center;
         }
     </style>
+    <!-- Yandex.RTB -->
+<script>window.yaContextCb=window.yaContextCb||[]</script>
+<script src="https://yandex.ru/ads/system/context.js" async></script>
 </head>
 <body>
 
@@ -82,11 +85,16 @@
         <div class="rewarded-ad">
             <!-- Примерный placeholder для рекламы от Яндекса. В реальности сюда будет вставлен код от Яндекс.Рекламы -->
             <div class="text-center text-gray-400">
-                <!-- Замените этот div на фактический код баннера или вызова SDK -->
-                <!-- Пример: <ins data-revive-zoneid="YOUR_ZONE_ID" data-revive-id="..."></ins> -->
-                <!-- Пример для тестирования: -->
-                <p>Блок рекламы 1 (Здесь будет реклама от Яндекс.Рекламной сети)</p>
-                <p class="text-xs mt-2">[Код рекламы вставляется сюда]</p>
+<!-- Yandex.RTB R-A-18439999-1 -->
+<script>
+window.yaContextCb.push(() => {
+    Ya.Context.AdvManager.render({
+        "blockId": "R-A-18439999-1",
+        "type": "fullscreen",
+        "platform": "touch"
+    })
+})
+</script>
             </div>
         </div>
         <button id="nextButton" class="nav-button" disabled>Далее</button>
